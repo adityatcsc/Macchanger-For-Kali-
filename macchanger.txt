@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Display current network interfaces
+#echo "Available network interfaces:"
+a=$(ifconfig -a | grep -oP '^[^\s:]+' | grep -v '^lo$' | head -n1)
+b=$(ifconfig -a | grep -oP '^[^\s:]+' | grep -v '^lo$' | tail -n1)
+
+for i in {0..2}
+do
+$i
+# Disable the network interface
+if [ $a = 'wlan'$i ]; then
+$(sudo ifconfig $a down)
+$(sudo macchanger -a $a)
+$(sudo macchanger -a $a)
+$(sudo macchanger -a $a)
+$(sudo ifconfig $a up)
+fi
+if [ $a = 'eth'$i ]; then
+$(sudo ifconfig $a down)
+$(sudo macchanger -a $a)
+$(sudo macchanger -a $a)
+$(sudo macchanger -a $a)
+$(sudo ifconfig $a up)
+fi
+done
