@@ -7,7 +7,6 @@ b=$(ifconfig -a | grep -oP '^[^\s:]+' | grep -v '^lo$' | tail -n1)
 
 for i in {0..2}
 do
-$i
 # Disable the network interface
 if [ $a = 'wlan'$i ]; then
 $(sudo ifconfig $a down)
